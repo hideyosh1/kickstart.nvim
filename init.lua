@@ -772,7 +772,19 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        --
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
+
+        html = { 'prettierd', 'prettier', stop_after_first = true },
+        css = { 'prettierd', 'prettier', stop_after_first = true },
+
+        markdown = { 'prettierd', 'prettier', stop_after_first = true },
+        -- openscad = formatters.lsp,
+        python = { 'black' },
+        sh = { 'shfmt' },
+        -- terraform = formatters.lsp,
+        typescript = { 'prettierd', 'prettier', stop_after_first = true },
+        typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -852,6 +864,10 @@ require('lazy').setup({
         -- Optionally, set `auto_show = true` to show the documentation after a delay.
         documentation = { auto_show = false, auto_show_delay_ms = 500 },
       },
+      cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = { menu = { auto_show = true } },
+      },
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
@@ -875,7 +891,6 @@ require('lazy').setup({
       signature = { enabled = true },
     },
   },
-
 
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
@@ -991,5 +1006,7 @@ require('lazy').setup({
   },
 })
 
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
