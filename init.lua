@@ -94,7 +94,7 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
--- See `:help vim.o`
+--  See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
@@ -223,7 +223,7 @@ vim.opt.modifiable = true -- Allow buffer modifications
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic Config & Keymaps
--- See :help vim.diagnostic.Opts
+-- See `:help vim.diagnostic.Opts`
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
@@ -331,8 +331,9 @@ require('lazy').setup {
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`.
   --
-  -- See `:help gitsigns` to understand what the configuration keys do
-  { -- Adds git related signs to the gutter, as well as utilities for managing changes
+  -- See `:help gitsigns` to understand what each configuration keys does.
+  -- Adds git related signs to the gutter, as well as utilities for managing changes
+  {
     'lewis6991/gitsigns.nvim',
     ---@module 'gitsigns'
     ---@type Gitsigns.Config
@@ -361,15 +362,16 @@ require('lazy').setup {
   --
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
-
-  { -- Useful plugin to show you pending keybinds.
+  --
+  -- Useful plugin to show you pending keybinds.
+  {
     'folke/which-key.nvim',
     event = 'VimEnter',
     ---@module 'which-key'
     ---@type wk.Opts
     ---@diagnostic disable-next-line: missing-fields
     opts = {
-      -- delay between pressing a key and opening which-key (milliseconds)
+      -- Delay between pressing a key and opening which-key (milliseconds)
       delay = 0,
       icons = { mappings = vim.g.have_nerd_font },
 
@@ -391,8 +393,9 @@ require('lazy').setup {
   -- you do for a plugin at the top level, you can do for a dependency.
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
-
-  { -- Fuzzy Finder (files, lsp, etc)
+  --
+  -- Fuzzy Finder (files, lsp, etc)
+  {
     'nvim-telescope/telescope.nvim',
     -- By default, Telescope is included and acts as your picker for everything.
 
@@ -406,7 +409,8 @@ require('lazy').setup {
     event = 'VimEnter',
     dependencies = {
       'nvim-lua/plenary.nvim',
-      { -- If encountering errors, see telescope-fzf-native README for installation instructions
+      -- If encountering errors, see telescope-fzf-native README for installation instructions
+      {
         'nvim-telescope/telescope-fzf-native.nvim',
 
         -- `build` is used to run some command when the plugin is installed/updated.
@@ -478,8 +482,8 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
-      -- This runs on LSP attach per buffer (see main LSP attach function in 'neovim/nvim-lspconfig' config for more info,
-      -- it is better explained there). This allows easily switching between pickers if you prefer using something else!
+      -- Add Telescope-based LSP pickers when an LSP attaches to a buffer.
+      -- If you later switch picker plugins, this is where to update these mappings.
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('telescope-lsp-attach', { clear = true }),
         callback = function(event)
@@ -900,7 +904,8 @@ require('lazy').setup {
     end,
   },
 
-  { -- Autoformat
+  -- Autoformat
+  {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
@@ -958,7 +963,8 @@ require('lazy').setup {
     },
   },
 
-  { -- Autocompletion
+  -- Autocompletion
+  {
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
@@ -1050,7 +1056,7 @@ require('lazy').setup {
       -- By default, we use the Lua implementation instead, but you may enable
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
-      -- See :h blink-cmp-config-fuzzy for more information
+      -- See `:help blink-cmp-config-fuzzy` for more information
       fuzzy = { implementation = 'lua' },
 
       -- Shows a signature help window while you type arguments for a function
@@ -1098,7 +1104,8 @@ require('lazy').setup {
     end,
   },
 
-  { -- Highlight, edit, and navigate code
+  -- Used to highlight, edit, and navigate code
+  {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     build = ':TSUpdate',
@@ -1128,9 +1135,9 @@ require('lazy').setup {
       ---@param buf integer
       ---@param language string
       local function treesitter_try_attach(buf, language)
-        -- check if parser exists and load it
+        -- Check if a parser exists and load it
         if not vim.treesitter.language.add(language) then return end
-        -- enables syntax highlighting and other treesitter features
+        -- Enable syntax highlighting and other treesitter features
         vim.treesitter.start(buf, language)
 
         -- enables treesitter based folds
@@ -1138,7 +1145,7 @@ require('lazy').setup {
         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
         vim.wo.foldmethod = 'expr'
 
-        -- check if treesitter indentation is available for this language, and if so enable it
+        -- Check if treesitter indentation is available for this language, and if so enable it
         -- in case there is no indent query, the indentexpr will fallback to the vim's built in one
         local has_indent_query = vim.treesitter.query.get(language, 'indents') ~= nil
 
@@ -1163,13 +1170,13 @@ require('lazy').setup {
           local installed_parsers = require('nvim-treesitter').get_installed 'parsers'
 
           if vim.tbl_contains(installed_parsers, language) then
-            -- enable the parser if it is installed
+            -- Enable the parser if it is already installed
             treesitter_try_attach(buf, language)
           elseif vim.tbl_contains(available_parsers, language) then
-            -- if a parser is available in `nvim-treesitter` auto install it, and enable it after the installation is done
+            -- If a parser is available in `nvim-treesitter`, auto-install it and enable it after the installation is done
             require('nvim-treesitter').install(language):await(function() treesitter_try_attach(buf, language) end)
           else
-            -- try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
+            -- Try to enable treesitter features in case the parser exists but is not available from `nvim-treesitter`
             treesitter_try_attach(buf, language)
           end
 
