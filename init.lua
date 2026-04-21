@@ -285,7 +285,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
--- [[ Configure and install plugins with `vim.pack` ]]
+-- [[ Install plugins with `vim.pack` ]]
+--  See `:help vim.pack`, `:help vim.pack-examples` or the
+--  excellent blog post from the creator of vim.pack and mini.nvim:
+--  https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack
 --
 --  To inspect plugin state and pending updates, run
 --    :lua vim.pack.update(nil, { offline = true })
