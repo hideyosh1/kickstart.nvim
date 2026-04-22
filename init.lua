@@ -1076,7 +1076,7 @@ require('lazy').setup {
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
-      --  - yinq - [Y]ank [I]nside [I]next [Q]uote
+      --  - yiiq - [Y]ank [I]nside [I]+1 [Q]uote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
       -- Shows a signature help window while you type arguments for a function
