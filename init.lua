@@ -742,9 +742,6 @@ do
           nixpkgs = {
             expr = 'import <nixpkgs> { }',
           },
-          formatting = {
-            command = { 'nixfmt' },
-          },
           -- Tell the language server your desired option set, for completion
           -- This is lazily evaluated.
           options = { -- Map of eval information
@@ -819,7 +816,7 @@ do
   vim.pack.add { gh 'stevearc/conform.nvim' }
   require('conform').setup {
     notify_on_error = false,
-    format_on_save = function(bufnr) return { timeout_ms = 500 } end,
+    format_on_save = function(bufnr) return { timeout_ms = 3000 } end,
     default_format_opts = {
       lsp_format = 'fallback', -- Use external formatters if configured below, otherwise use LSP formatting. Set to `false` to disable LSP formatting entirely.
     },
@@ -836,10 +833,10 @@ do
       meson = { 'meson' },
 
       javascript = { 'standardjs', 'prettierd', 'prettier', stop_after_first = true },
-      html = { 'prettierd', 'prettier', stop_after_first = true },
-      css = { 'prettierd', 'prettier', stop_after_first = true },
+      html = { 'prettier', 'prettierd', stop_after_first = true },
+      css = { 'prettier', 'prettierd', stop_after_first = true },
 
-      nix = { 'nixfmt' },
+      nix = { 'nixfmt -' },
       -- markdown = { 'prettierd', 'prettier', stop_after_first = true },
       -- openscad = formatters.lsp,
       python = { 'black' },
