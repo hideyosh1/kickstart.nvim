@@ -696,6 +696,31 @@ do
     --
     -- But for many setups, the LSP (`ts_ls`) will work just fine
     -- ts_ls = {},
+    arduino_language_server = {
+      capabilities = {
+        textDocument = {
+          semanticTokens = vim.NIL,
+        },
+        workspace = {
+          semanticTokens = vim.NIL,
+        },
+      },
+      cmd = {
+        'arduino-language-server',
+        '-cli-config',
+        vim.fn.expand '~/.arduino15/arduino-cli.yaml',
+        '-fqbn',
+        'esp8266:esp8266:d1_mini',
+        '-cli',
+        'arduino-cli',
+        '-clangd',
+        'clangd',
+      },
+
+      filetypes = { 'arduino' },
+
+      root_dir = function(_, on_dir) on_dir(vim.fn.expand '%:p:h') end,
+    },
 
     stylua = {}, -- Used to format Lua code
 
@@ -833,17 +858,19 @@ do
       meson = { 'meson' },
 
       javascript = { 'standardjs', 'prettierd', 'prettier', stop_after_first = true },
-      html = { 'prettier', 'prettierd', stop_after_first = true },
-      css = { 'prettier', 'prettierd', stop_after_first = true },
+      html = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
+      css = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
+      json = { 'jq' },
 
       nix = { 'nixfmt -' },
-      -- markdown = { 'prettierd', 'prettier', stop_after_first = true },
+      -- markdown = { 'prettierd', 'standardjs', 'prettier', stop_after_first = true },
       -- openscad = formatters.lsp,
       python = { 'black' },
       sh = { 'shfmt' },
       -- terraform = formatters.lsp,
-      typescript = { 'prettierd', 'prettier', stop_after_first = true },
-      typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
+      javascriptreact = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
+      typescript = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
+      typescriptreact = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
     },
   }
 

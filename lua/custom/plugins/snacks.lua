@@ -9,9 +9,9 @@ local opts = {
   animate = {
     enabled = false,
   },
-  bigfile = { enabled = true },
+  bigfile = { enabled = false },
   quickfile = { enabled = true },
-  image = { enabled = true },
+  image = { enabled = false },
   input = { enabled = true },
   scope = { enabled = true },
   words = { enabled = true },
