@@ -894,7 +894,7 @@ do
     formatters_by_ft = {
       -- rust = { 'rustfmt' },
       -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
+      python = { 'isort', 'black' },
       --
       -- You can use 'stop_after_first' to run the first available formatter from the list
       --
@@ -910,7 +910,6 @@ do
       nix = { 'nixfmt -' },
       -- markdown = { 'prettierd', 'standardjs', 'prettier', stop_after_first = true },
       -- openscad = formatters.lsp,
-      python = { 'black' },
       sh = { 'shfmt' },
       -- terraform = formatters.lsp,
       javascriptreact = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
