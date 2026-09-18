@@ -903,8 +903,8 @@ do
       meson = { 'meson' },
 
       javascript = { 'standardjs', 'prettierd', 'prettier', stop_after_first = true },
-      html = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
-      css = { 'standardjs', 'prettier', 'prettierd', stop_after_first = true },
+      html = { 'prettier', 'prettierd', stop_after_first = true },
+      css = { 'prettier', 'prettierd', stop_after_first = true },
       json = { 'jq' },
 
       nix = { 'nixfmt -' },
